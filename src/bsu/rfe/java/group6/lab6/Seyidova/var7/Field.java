@@ -28,7 +28,6 @@ public class Field extends JPanel {
             repaint();
         }
     });
-    // Конструктор класса BouncingBall
     public Field() {
         // Установить цвет заднего фона белым
         setBackground(Color.WHITE);
@@ -36,12 +35,9 @@ public class Field extends JPanel {
         repaintTimer.start();
     }
 
-    // Унаследованный от JPanel метод перерисовки компонента
     public void paintComponent(Graphics g) {
-        // Вызвать версию метода, унаследованную от предка
         super.paintComponent(g);
         Graphics2D canvas = (Graphics2D) g;
-        // Последовательно запросить прорисовку от всех мячей из списка
         for (BouncingBall ball: balls) {
             ball.paint(canvas);
         }
@@ -49,50 +45,34 @@ public class Field extends JPanel {
 
     // Метод добавления нового мяча в список
     public void addBall() {
-        //Заключается в добавлении в список нового экземпляра BouncingBall
-        // Всю инициализацию положения, скорости, размера, цвета
-        // BouncingBall выполняет сам в конструкторе
         balls.add(new BouncingBall(this));
     }
-
-    // Метод синхронизированный, т.е. только один поток может
-    // одновременно быть внутри
     public  void pause() {
-        // Включить режим паузы
         paused = true;
-
-
     }
-
     public  void pause1() {
-        // Включить режим паузы
         paused1 = true;
         paused = true;
         resumeLol = false;
 
     }
-
     public synchronized void resumeLol() {
-        // Включить режим паузы
         paused = false;
         resumeLol = true;
         notifyAll();
     }
 
-    // Метод синхронизированный, т.е. только один поток может
-    // одновременно быть внутри
+    // Метод синхронизированный,только один поток может одновременно быть внутри
     public synchronized void resume() {
         // Выключить режим паузы
         paused = false;
         paused1 = false;
-
-        // Будим все ожидающие продолжения потоки
         notifyAll();
     }
 
     // Синхронизированный метод проверки, может ли мяч двигаться
-    // (не включен ли режим паузы?)
     public synchronized void canMove(BouncingBall ball) throws
+            // (не включен ли режим паузы?)
             InterruptedException {
 
         if (paused) {

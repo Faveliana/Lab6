@@ -15,8 +15,8 @@ public class MainFrame extends JFrame {
 
     // Константы, задающие размер окна приложения, если оно
     // не распахнуто на весь экран
-    private static final int WIDTH = 700;
-    private static final int HEIGHT = 500;
+    private static final int WIDTH = 800;
+    private static final int HEIGHT = 400;
 
     private JMenuItem pauseMenuItem;
     private JMenuItem pause2MenuItem;

@@ -7,9 +7,9 @@ import java.awt.geom.Ellipse2D;
 public class BouncingBall implements Runnable {
 
     // Максимальный радиус, который может иметь мяч
-    private static final int MAX_RADIUS = 40;
+    private static final int MAX_RADIUS = 90;
     // Минимальный радиус, который может иметь мяч
-    private static final int MIN_RADIUS = 3;
+    private static final int MIN_RADIUS = 0;
     // Максимальная скорость, с которой может летать мяч
     private static final int MAX_SPEED = 15;
 
@@ -29,9 +29,7 @@ public class BouncingBall implements Runnable {
     // Конструктор класса BouncingBall
     public BouncingBall(Field field) {
         // Необходимо иметь ссылку на поле, по которому прыгает мяч,
-        // чтобы отслеживать выход за его пределы
-
-        // через getWidth(), getHeight()
+        // чтобы отслеживать выход за его пределы через getWidth(), getHeight()
         this.field = field;
         // Радиус мяча случайного размера
         radius = new Double(Math.random()*(MAX_RADIUS - MIN_RADIUS)).intValue() + MIN_RADIUS;
@@ -64,12 +62,9 @@ public class BouncingBall implements Runnable {
 
     }
 
-    // Метод run() исполняется внутри потока. Когда он завершает работу,
-    // то завершается и поток
+    // Метод run() исполняется внутри потока.Когда он завершает работу,то завершается и поток
     public void run() {
-        try {
-            // Крутим бесконечный цикл, т.е. пока нас не прервут,
-            // мы не намерены завершаться
+        try { // Крутим бесконечный цикл,пока не прервут,не намерены завершаться
             while(true) {
                 // Синхронизация потоков на самом объекте поля
                 // Если движение разрешено - управление будет
@@ -108,9 +103,7 @@ public class BouncingBall implements Runnable {
                 // Скорость = 15 (быстро), засыпаем на 1 мс.
                 Thread.sleep(16-speed);
             }
-        } catch (InterruptedException ex) {
-            // Если нас прервали, то ничего не делаем
-            // и просто выходим (завершаемся)
+        } catch (InterruptedException ex) { // Если прервали, то ничего не делаем просто выходим
         }
     }
 
